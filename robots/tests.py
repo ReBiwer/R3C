@@ -1,8 +1,9 @@
 import json
 
 from django.http import JsonResponse
-from django.urls import reverse
 from django.test import TestCase
+from django.urls import reverse
+
 
 class TestAddRobot(TestCase):
     @classmethod
@@ -21,18 +22,10 @@ class TestAddRobot(TestCase):
 
     def test_create_robot(self):
         json_data = json.dumps(self.test_data)
-        response: JsonResponse = self.client.post(
-            path=reverse("robots:add"),
-            content_type="json",
-            data=json_data
-        )
+        response: JsonResponse = self.client.post(path=reverse("robots:add"), content_type="json", data=json_data)
         self.assertEqual(response.status_code, 200)
 
     def test_error_create(self):
         json_data = json.dumps(self.test_invalid_data)
-        response: JsonResponse = self.client.post(
-            path=reverse("robots:add"),
-            content_type="json",
-            data=json_data
-        )
+        response: JsonResponse = self.client.post(path=reverse("robots:add"), content_type="json", data=json_data)
         self.assertEqual(response.status_code, 403)

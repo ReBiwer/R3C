@@ -1,7 +1,9 @@
 import json
-from django.http import HttpRequest, JsonResponse
-from django.views.generic import View
+
 from django.db import transaction
+from django.http import HttpRequest
+from django.http import JsonResponse
+from django.views.generic import View
 from pydantic import ValidationError
 
 from .models import Robot
@@ -17,9 +19,7 @@ class AddRobot(View):
             for data in data.values():
                 serial_robot = f"{data['model']}-{data['version']}"
                 data_robot = RobotBase(serial=serial_robot, model=data["model"], version=data["version"])
-                robots.append(
-                    Robot(**data_robot.model_dump())
-                )
+                robots.append(Robot(**data_robot.model_dump()))
             with transaction.atomic():
                 Robot.objects.bulk_create(robots)
             return JsonResponse({"success": True}, status=200)
