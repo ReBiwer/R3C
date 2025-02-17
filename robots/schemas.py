@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from pydantic import ConfigDict
 
 
-class RobotBase(BaseModel):
+class RobotInfo(BaseModel):
     serial: str
     model: str
     version: str
