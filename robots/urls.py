@@ -1,5 +1,5 @@
 from django.urls import path
-from views import AddRobot
+from .views import AddRobot
 
 app_name = "robots"
 
