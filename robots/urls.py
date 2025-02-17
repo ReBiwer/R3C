@@ -4,5 +4,5 @@ from .views import AddRobot
 app_name = "robots"
 
 urlpatterns = [
-    path("add/", AddRobot.as_view(), name="add_robot"),
+    path("add/", AddRobot.as_view(), name="add"),
 ]
