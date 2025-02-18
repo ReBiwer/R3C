@@ -1,13 +1,18 @@
 import json
+from datetime import timedelta
+from io import BytesIO
 
 from django.http import JsonResponse
+from django.test import RequestFactory
 from django.test import TestCase
 from django.urls import reverse
-from pandas import DataFrame
+from django.utils import timezone
+from openpyxl import load_workbook
 
-from .schemas import RobotToExcel
-from .utils import get_dataframe
-from .utils import get_info_robots
+from robots.models import Robot
+from robots.utils import get_dataframe
+from robots.utils import get_info_robots
+from robots.views import ExportToExcel
 
 
 class TestAddRobot(TestCase):
@@ -34,23 +39,6 @@ class TestAddRobot(TestCase):
         json_data = json.dumps(self.test_invalid_data)
         response: JsonResponse = self.client.post(path=reverse("robots:add"), content_type="json", data=json_data)
         self.assertEqual(response.status_code, 403)
-
-
-from datetime import timedelta
-from io import BytesIO
-
-from django.http import HttpResponse
-
-# tests/test_views.py
-from django.test import RequestFactory
-from django.test import TestCase
-from django.utils import timezone
-from openpyxl import load_workbook
-
-from robots.models import Robot
-from robots.utils import get_dataframe
-from robots.utils import get_info_robots
-from robots.views import ExportToExcel
 
 
 class ExportToExcelTests(TestCase):
