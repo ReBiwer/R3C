@@ -53,7 +53,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-INTERNAL_IPS = ['127.0.0.1',]
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 ROOT_URLCONF = "R4C.urls"
 
@@ -61,7 +63,7 @@ if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
     DEBUG_TOOLBAR_CONFIG = {
-        'INTERCEPT_REDIRECTS': False,
+        "INTERCEPT_REDIRECTS": False,
     }
 
 
