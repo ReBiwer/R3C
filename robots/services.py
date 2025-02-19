@@ -1,19 +1,17 @@
 import os
-import dotenv
 
+import dotenv
 from django.core.mail import send_mail
+
 from orders.models import Order
 from robots.schemas import RobotInfo
 
 dotenv.load_dotenv()
 
+
 def send_availability_notifications(robot: RobotInfo):
     """Обработчик отправляющий уведомления на почту клиента"""
-    orders = (
-        Order.objects
-        .select_related("customer")
-        .filter(robot_serial=robot.serial)
-    )
+    orders = Order.objects.select_related("customer").filter(robot_serial=robot.serial)
     email_subject = "Робот теперь в наличии"
     email_message = (
         f"Добрый день!\n"
